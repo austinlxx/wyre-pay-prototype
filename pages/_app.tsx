@@ -1,6 +1,6 @@
-import '../styles/globals.css'
+import '../ui/globals.css'
 import {ChakraProvider} from "@chakra-ui/react"
-import { customTheme } from '@/styles/theme'
+import { customTheme } from '@/ui/theme'
 
 function WyrePay({Component, pageProps}) {
 
