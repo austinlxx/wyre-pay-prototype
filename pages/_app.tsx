@@ -1,14 +1,18 @@
-import '../ui/globals.css'
-import {ChakraProvider} from "@chakra-ui/react"
-import { customTheme } from '@/ui/theme'
+import "@/ui/globals.css";
+import "@/ui/fonts/font.css";
+import { ChakraProvider } from "@chakra-ui/react";
+import { Provider } from "jotai";
+import { customTheme } from "@/ui/theme";
 
-function WyrePay({Component, pageProps}) {
+function App({ Component, pageProps }) {
 
   return (
-    <ChakraProvider theme={customTheme}>
-      <Component {...pageProps} />
-    </ChakraProvider>
-  )
+    <Provider>
+      <ChakraProvider theme={customTheme}>
+        <Component {...pageProps} />
+      </ChakraProvider>
+    </Provider>
+  );
 }
 
-export default WyrePay
+export default App;
