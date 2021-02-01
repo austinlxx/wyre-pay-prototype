@@ -1,8 +1,5 @@
-/** @jsx jsx */
-import React from 'react';
 import {isValidMotionProp, motion} from "framer-motion";
 import {forwardRef, Text} from "@chakra-ui/react";
-import {jsx} from "@emotion/react";
 
 export const MotionText = motion.custom(
   forwardRef((props, ref) => {

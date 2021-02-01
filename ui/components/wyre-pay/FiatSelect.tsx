@@ -13,11 +13,11 @@ import {
 } from "@chakra-ui/react";
 import { Button } from "../buttons";
 import { MenuIcon } from "@/ui/icons";
-import { cryptoType, fakeStore } from "@/pages/api/fakeStore";
+import { fiatType, fakeStore } from "@/pages/api/fakeStore";
 
-const Crypto = (name, abbr, icon) => (
+const Fiat = (name, abbr, icon) => (
     <Stack direction={"row"} align={"center"} spacing={4} py={3} px={4} _hover={{ background: "gray.50" }}
-           userSelect={"none"} cursor={"pointer"}>
+           userSelect={"none"} cursor={"pointer"} _notLast={{ borderBottomWidth: 1, borderColor: "gray.100" }}>
       {icon(8)}
       <Box fontSize={"md"}>
         <Text fontWeight={"bold"} fontFamily={"heading"}>{abbr}</Text>
@@ -26,18 +26,18 @@ const Crypto = (name, abbr, icon) => (
     </Stack>
   );
 
-export function CryptoSelect({
-                               cryptoType,
-                               setCryptoType
-                             }: { cryptoType: cryptoType, setCryptoType: React.Dispatch<React.SetStateAction<cryptoType>> }) {
+export function FiatSelect({
+                               fiatType,
+                               setFiatType
+                             }: { fiatType: fiatType, setFiatType: React.Dispatch<React.SetStateAction<fiatType>> }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLargerThanMobile] = useMediaQuery(["(min-width: 480px)"])
 
-  const { name, abbr, icon } = cryptoType;
-  const allCryptoTypes = fakeStore.cryptoTypes;
+  const { name, abbr, icon } = fiatType;
+  const allFiatTypes = fakeStore.fiatTypes;
 
-  const handleSelection = ({ crypto }) => {
-    setCryptoType(crypto);
+  const handleSelection = ({ fiat }) => {
+    setFiatType(fiat);
     onClose();
   };
 
@@ -54,14 +54,11 @@ export function CryptoSelect({
         <DrawerOverlay>
           <DrawerContent>
             <DrawerCloseButton />
-            <DrawerHeader>
-              <Text fontFamily={'heading'}>Choose destination</Text>
-              <Text fontFamily={'body'} fontSize={'md'} fontWeight={'regular'} color={'gray.400'}>20+ assets supported</Text>
-            </DrawerHeader>
+            <DrawerHeader fontFamily={"heading"}>Pay with...</DrawerHeader>
             <DrawerBody px={0}>
-              {allCryptoTypes.map((crypto) => {
-                return (<Box key={crypto.name} _notLast={{ borderBottomWidth: 1, borderColor: "gray.100" }}
-                  onClick={() => handleSelection({ crypto })}>{Crypto(crypto.name, crypto.abbr, crypto.icon)}</Box>);
+              {allFiatTypes.map((fiat) => {
+                return (<Box key={fiat.name}
+                  onClick={() => handleSelection({ fiat })}>{Fiat(fiat.name, fiat.abbr, fiat.icon)}</Box>);
               })}
             </DrawerBody>
           </DrawerContent>
